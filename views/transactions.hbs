@@ -1,0 +1,25 @@
+<div>
+    <h2 class="float-md-left">{{title}}</h2>
+    <div class="float-md-right">
+        <a href="index.hbs" class="btn btn-success">Add</a>
+    </div>
+</div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+        </tr>
+        {{#each transactions}}
+            <tr>
+                <td>{{date}}</td>
+                <td>{{amount}}</td>
+                <td>{{description}}</td>
+                <td>{{category}}</td>
+            </tr>
+        {{/each}}
+    </table>
+</div>
