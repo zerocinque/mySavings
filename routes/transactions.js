@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         transactions.forEach(function (t) {
             t.viewDate = t.date.toLocaleDateString('en-GB', options);
-            t.viewNext = t.date.toLocaleString('en-GB', options);
+            t.viewNext = t.next ? t.next.toLocaleString('en-GB', options) : "";
         });
         res.render('transactions', {title: 'Transactions',transactions: transactions});
     });
@@ -66,11 +66,11 @@ router.post('/edit/:id', function(req, res, next) {
 
 /* DELETE transaction */
 router.delete('/delete/:id', function (req, res) {
-    Transaction.findByIdAndRemove( {_id: req.params.id}, function (err, item) {
+    Transaction.findByIdAndRemove( {_id: req.params.id}, function (err) {
         if (err)
-            res.status(500).render('error', err);
+            res.status(500).json({error: err});
         else
-            res.redirect('/transactions');
+            res.status(200).json();
     });
 });
 

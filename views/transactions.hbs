@@ -6,26 +6,40 @@
 </div>
 
 <div>
-    <table class="table">
+    <table class="table table-striped">
+        <thead class="thead-dark">
         <tr>
             <th scope="col">Date</th>
             <th scope="col">Amount</th>
             <th scope="col">Description</th>
             <th scope="col">Category</th>
             <th scope="col">Next</th>
-            <th scope="colgroup">Functions</th>
+            <th scope="col">Functions</th>
         </tr>
+        </thead>
+        <tbody>
         {{#each transactions}}
-            <tr>
+            <tr id="{{_id}}">
                 <td>{{viewDate}}</td>
                 <td>{{amount}}</td>
                 <td>{{description}}</td>
                 <td>{{category}}</td>
                 <td>{{viewNext}}</td>
-                <td>
-                    <a href="/transactions/edit/{{_id}}"><i class="far fa-edit"></i></a>
+                <td class="table-func">
+                    <a class="btn" href="/transactions/edit/{{_id}}"><i class="far fa-edit"></i></a>
+                    <a class="btn"><i onclick="del('{{_id}}')" class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
         {{/each}}
+        </tbody>
     </table>
 </div>
+
+<script>
+   function del(id) {
+       $.ajax({url: 'transactions/delete/'+id, method: "DELETE"})
+           .done(function () {
+               $('#'+id).hide('slow');
+           });
+   }
+</script>
