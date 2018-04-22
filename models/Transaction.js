@@ -6,6 +6,7 @@ var Transaction = new Schema({
     amount: Number,
     description: String,
     category: String,
+    next: {type: Date, default: null},
     dateIns: {type: Date, default: Date.now}
 }, {
     collection:'transaction'
